@@ -1,0 +1,26 @@
+{
+  "name": "console-palette",
+  "version": "1.0.0",
+  "description": "A light weight versatile Node.js library for customizing the style and color of the console output.",
+  "main": "console-palette.js",
+  "author": "Gracie Gould graciegould@gmail.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graciegould/console-palette"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "console",
+    "CLI tool",
+    "style",
+    "nodejs",
+    "cli",
+    "terminal",
+    "ANSI",
+    "scripts",
+    "colors"
+  ]
+}
