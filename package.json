@@ -21,6 +21,9 @@
     "terminal",
     "ANSI",
     "scripts",
-    "colors"
+    "colors",
+    "console-palette",
+    "colorful console",
+    "terminal utilities"
   ]
 }
