@@ -166,7 +166,6 @@ function custom(text, { color, background, style } = {}) {
         } else if (color.startsWith('rgb')) {
             colorCode = rgbStringToAnsi(color);
         } else if (ANSI_CODES.hasOwnProperty(color)) {
-            console.log(color);
             colorCode = ANSI_CODES[color];
         }
     }
@@ -182,7 +181,6 @@ function custom(text, { color, background, style } = {}) {
             if (background.startsWith('bg') && ANSI_CODES[background]) {
                 backgroundCode = ANSI_CODES[ANSI_CODES[background.remove('bg').toLowerCase()]];
             } else if (ANSI_CODES['bg' + background.charAt(0).toUpperCase() + background.slice(1)]) {
-                console.log('bg' + background.charAt(0).toUpperCase() + background.slice(1));
                 backgroundCode = ANSI_CODES['bg' + background.charAt(0).toUpperCase() + background.slice(1)];
             }
         }
