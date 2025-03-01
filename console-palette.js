@@ -216,23 +216,10 @@ const rgbStringToAnsiBackground = (rgbString) => {
 };
 
 /**
- * Generates a random Unicode character code within a specified range.
+ * Generates a random emoji from the specified ranges.
  *
- * @param {number} start - The start of the Unicode range.
- * @param {number} end - The end of the Unicode range.
- * @returns {string} The random Unicode character.
+ * @returns {string} The random emoji.
  */
-const randomUnicodeChar = () => {
-    const start = 0x0020; // Start of printable characters (space)
-    const end = 0x1FAFF;  // End of Symbols and Pictographs Extended-A
-    const randomCodePoint = start + Math.floor(Math.random() * (end - start + 1));
-    let char = String.fromCodePoint(randomCodePoint);
-    if (char.trim() === '' || char.codePointAt(0) === '0x1176C') {
-        return randomUnicodeChar();
-    }
-    return char;
-};
-
 function randomEmoji() {
     const range = EMOJI_RANGES[Math.floor(Math.random() * EMOJI_RANGES.length)];
     const [start, end] = range;
@@ -300,26 +287,20 @@ function custom(text, { color, background, style } = {}) {
 /**
  * Generates random structured art with emojis.
  *
- * @param {number} width - The width of the art.
- * @param {number} height - The height of the art.
- * @param {Array<string>} emojis - The list of emojis to use.
+ * @param {Object} options - The options for generating the art.
+ * @param {number} [options.rows=20] - The number of rows in the art.
+ * @param {number} [options.cols=30] - The number of columns in the art.
  * @returns {string} The generated art.
  */
-function generateRandomArt(rows = 50, cols = 50, characters = null) {
-    let len = 0;
-    if (!characters) {
-        len = Math.floor(Math.random() * 10) + 1;
-        characters = Array.from({ length: len }, () => randomEmoji());
-    } else {
-        if (typeof characters === 'string') {
-            characters = characters.split('');
-        }
-        len = characters.length;
-    }
-    const freqX = Math.random() * len * Math.PI;
-    const freqY = Math.random() * len * Math.PI;
-    const phaseX = Math.random() * len * Math.PI;
-    const phaseY = Math.random() * len * Math.PI;
+function generateRandomArt(options = {}) {
+    const defaultOptions = { rows: 20, cols: 30 };
+    let { rows, cols } = { ...defaultOptions, ...options };
+    const len = Math.floor(Math.random() * 10) + 1;
+    const characters = Array.from({ length: len }, () => randomEmoji());
+    let freqX = Math.random() * Math.PI * cols;
+    let freqY = Math.random() * Math.PI * rows;
+    let phaseX = Math.random() * Math.PI * cols;
+    let phaseY = Math.random() * Math.PI * rows;
     let art = '';
     for (let y = 0; y < rows; y++) {
         let rowStr = '';
@@ -334,7 +315,6 @@ function generateRandomArt(rows = 50, cols = 50, characters = null) {
     }
     return art;
 }
-
 const cp = (() => {
     let _cp = {};
     Object.keys(ANSI_CODES).forEach((key) => {
@@ -357,7 +337,8 @@ const cp = (() => {
     _cp.hexToAnsiBackground = hexToAnsiBackground;
     _cp.rgbToAnsiBackground = rgbToAnsiBackground;
     _cp.rgbStringToAnsiBackground = rgbStringToAnsiBackground;
-    _cp.generateStructuredArt = generateRandomArt;
+    _cp.randomEmoji = randomEmoji;
+    _cp.generateRandomArt = generateRandomArt;
     return _cp;
 })();
 
