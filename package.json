@@ -1,6 +1,6 @@
 {
   "name": "console-palette",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A light weight versatile Node.js library for customizing the style and color of the console output.",
   "main": "console-palette.js",
   "author": "Gracie Gould graciegould@gmail.com",
